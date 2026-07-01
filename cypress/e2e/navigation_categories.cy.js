@@ -32,7 +32,9 @@ describe('Navigation et Catégories - Boutika', () => {
     cy.get(selecteurs.premierLienCategorie).first().click({ force: true });
 
     // Vérifications strictes (Chai) de la nouvelle page
-    cy.url().should('include', 'telephones-et-tablettes');
+    // On applique le timeout local ici pour attendre le chargement de la nouvelle page
+    cy.url({ timeout: 7000 }).should('include', 'telephones-et-tablettes');
+   
     cy.get(selecteurs.titrePageCategorie).should('be.visible');
   });
 });
