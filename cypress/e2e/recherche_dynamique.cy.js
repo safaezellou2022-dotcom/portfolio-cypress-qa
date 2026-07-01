@@ -1,4 +1,4 @@
-describe('Jour 6 - Tests Data-Driven avec Fixtures sur Boutika', () => {
+describe('Tests Data-Driven avec Fixtures sur Boutika', () => {
 
   beforeEach(() => {
     // Évite que le crash de la base de données de Boutika ne stoppe le test
@@ -7,7 +7,7 @@ describe('Jour 6 - Tests Data-Driven avec Fixtures sur Boutika', () => {
     });
     
     // Visite du site avec un timeout de sécurité
-    cy.visit('https://boutika.co.ma', { timeout: 10000 });
+    cy.visit('/', { timeout: 10000 });
   });
 
   // 1. Chargement du fichier JSON contenant la liste des produits
@@ -24,8 +24,6 @@ describe('Jour 6 - Tests Data-Driven avec Fixtures sur Boutika', () => {
 
         // 3. Validation asynchrone (Le site plante sur la recherche, on valide l'URL)
         cy.url({ timeout: 6000 }).should('include', `s=${produit.nom}`);
-        
-        // NOTE: Si le site fonctionnait, nous validerions les résultats ici.
         // Vu le bug PrestaShop actuel, on vérifie que la page d'erreur se charge.
         cy.contains('This page has moved', { timeout: 5000 }).should('be.visible');
         
